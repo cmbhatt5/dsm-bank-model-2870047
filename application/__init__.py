@@ -51,6 +51,8 @@ def predict():
     #get data from request
     data = request.get_json(force=True)
     data_categoric = np.array([data["job"], data["marital"], data["education"], data["default"], data["housing"], data["loan"]])
+    print(data_categoric)
+
     data_categoric = np.reshape(data_categoric, (1, -1))
     data_categoric = ohe.transform(data_categoric).toarray()
  
@@ -67,5 +69,6 @@ def predict():
 
     #make predicon using model
     prediction = rfc.predict(data_final)
+    #return Response(data_categoric)
     return Response(json.dumps(prediction[0]))
 
